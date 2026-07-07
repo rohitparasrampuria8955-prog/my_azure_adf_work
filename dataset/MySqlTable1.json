@@ -1,0 +1,16 @@
+{
+	"name": "MySqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dineshnewMySql3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "MySqlTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "`mup_dpr_report_mysql`"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

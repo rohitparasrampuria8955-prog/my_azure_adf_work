@@ -1,0 +1,99 @@
+{
+	"name": "Parquet2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "new_practice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "pos_batch_sep_dec - pos_batch_sep_dec.parquet",
+				"folderPath": "to_parquet",
+				"fileSystem": "june-paractis"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "transaction_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_city",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_region",
+				"type": "UTF8"
+			},
+			{
+				"name": "cashier_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "customer_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "transaction_date",
+				"type": "UTF8"
+			},
+			{
+				"name": "transaction_time",
+				"type": "UTF8"
+			},
+			{
+				"name": "product_sku",
+				"type": "UTF8"
+			},
+			{
+				"name": "product_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "category",
+				"type": "UTF8"
+			},
+			{
+				"name": "subcategory",
+				"type": "UTF8"
+			},
+			{
+				"name": "quantity",
+				"type": "UTF8"
+			},
+			{
+				"name": "unit_price",
+				"type": "UTF8"
+			},
+			{
+				"name": "discount_pct",
+				"type": "UTF8"
+			},
+			{
+				"name": "total_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "payment_method",
+				"type": "UTF8"
+			},
+			{
+				"name": "loyalty_points",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,16 @@
+{
+	"name": "mup_table_load",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MySql1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "MySqlTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "mup_detail"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

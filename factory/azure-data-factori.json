@@ -1,0 +1,15 @@
+{
+	"name": "azure-data-factori",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d3ff8f6a-84ef-4abf-bcea-1af7a8e1c9c9",
+		"tenantId": "bc247822-bc68-4316-bcb6-65db84e81740"
+	}
+}

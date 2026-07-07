@@ -1,0 +1,106 @@
+{
+	"name": "junedataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "june_csv",
+						"type": "DatasetReference"
+					},
+					"name": "junepractice"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "june_csv",
+						"type": "DatasetReference"
+					},
+					"name": "csvtoparquet"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          transaction_id as string,",
+				"          store_id as string,",
+				"          store_name as string,",
+				"          store_city as string,",
+				"          store_region as string,",
+				"          cashier_id as string,",
+				"          customer_id as string,",
+				"          transaction_date as string,",
+				"          transaction_time as string,",
+				"          product_sku as string,",
+				"          product_name as string,",
+				"          category as string,",
+				"          subcategory as string,",
+				"          quantity as string,",
+				"          unit_price as string,",
+				"          discount_pct as string,",
+				"          total_amount as string,",
+				"          payment_method as string,",
+				"          loyalty_points as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> junepractice",
+				"junepractice select(mapColumn(",
+				"          transaction_id,",
+				"          store_id,",
+				"          store_name,",
+				"          store_region,",
+				"          cashier_id,",
+				"          customer_id,",
+				"          transaction_time,",
+				"          product_sku,",
+				"          product_name,",
+				"          category,",
+				"          subcategory,",
+				"          quantity,",
+				"          unit_price,",
+				"          discount_pct,",
+				"          total_amount,",
+				"          payment_method,",
+				"          loyalty_points",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          transaction_id as string,",
+				"          store_id as string,",
+				"          store_name as string,",
+				"          store_city as string,",
+				"          store_region as string,",
+				"          cashier_id as string,",
+				"          customer_id as string,",
+				"          transaction_date as string,",
+				"          transaction_time as string,",
+				"          product_sku as string,",
+				"          product_name as string,",
+				"          category as string,",
+				"          subcategory as string,",
+				"          quantity as string,",
+				"          unit_price as string,",
+				"          discount_pct as string,",
+				"          total_amount as string,",
+				"          payment_method as string,",
+				"          loyalty_points as string",
+				"     ),",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> csvtoparquet"
+			]
+		}
+	}
+}
