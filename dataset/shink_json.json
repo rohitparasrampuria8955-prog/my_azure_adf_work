@@ -1,0 +1,19 @@
+{
+	"name": "shink_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "helthcare_project_link_service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "bronze-layer/patient-fhir",
+				"fileSystem": "healthcare-project-data"
+			}
+		},
+		"schema": {}
+	}
+}
