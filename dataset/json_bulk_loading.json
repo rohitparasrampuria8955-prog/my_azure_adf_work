@@ -26,7 +26,8 @@
 				"type": {
 					"value": "@dataset().FileName",
 					"type": "Expression"
-				}
+				},
+				"level": "Fastest"
 			}
 		},
 		"schema": {
