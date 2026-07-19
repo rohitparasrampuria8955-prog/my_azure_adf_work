@@ -1374,7 +1374,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/load_mup_file')]",
+			"name": "[concat(parameters('factoryName'), '/load_json')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1383,109 +1383,294 @@
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "DelimitedText",
+				"type": "Json",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "MUP_DPR_RY24_P04_V10_DY22_NPIBN - MUP_DPR_RY24_P04_V10_DY22_NPIBN (1).csv",
-						"folderPath": "landing-data/mup-csv-file-data",
+						"folderPath": "landing-data/json-file-data",
 						"fileSystem": "healthcare-project-data"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Prscrbr_NPI",
-						"type": "String"
-					},
-					{
-						"name": "Prscrbr_Last_Org_Name",
-						"type": "String"
-					},
-					{
-						"name": "Prscrbr_First_Name",
-						"type": "String"
-					},
-					{
-						"name": "Prscrbr_City",
-						"type": "String"
-					},
-					{
-						"name": "Prscrbr_State_Abrvtn",
-						"type": "String"
-					},
-					{
-						"name": "Prscrbr_State_FIPS",
-						"type": "String"
-					},
-					{
-						"name": "Prscrbr_Type",
-						"type": "String"
-					},
-					{
-						"name": "Prscrbr_Type_Src",
-						"type": "String"
-					},
-					{
-						"name": "Brnd_Name",
-						"type": "String"
-					},
-					{
-						"name": "Gnrc_Name",
-						"type": "String"
-					},
-					{
-						"name": "Tot_Clms",
-						"type": "String"
-					},
-					{
-						"name": "Tot_30day_Fills",
-						"type": "String"
-					},
-					{
-						"name": "Tot_Day_Suply",
-						"type": "String"
-					},
-					{
-						"name": "Tot_Drug_Cst",
-						"type": "String"
-					},
-					{
-						"name": "Tot_Benes",
-						"type": "String"
-					},
-					{
-						"name": "GE65_Sprsn_Flag",
-						"type": "String"
-					},
-					{
-						"name": "GE65_Tot_Clms",
-						"type": "String"
-					},
-					{
-						"name": "GE65_Tot_30day_Fills",
-						"type": "String"
-					},
-					{
-						"name": "GE65_Tot_Drug_Cst",
-						"type": "String"
-					},
-					{
-						"name": "GE65_Tot_Day_Suply",
-						"type": "String"
-					},
-					{
-						"name": "GE65_Bene_Sprsn_Flag",
-						"type": "String"
-					},
-					{
-						"name": "GE65_Tot_Benes",
-						"type": "String"
 					}
-				]
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"resourceType": {
+							"type": "string"
+						},
+						"type": {
+							"type": "string"
+						},
+						"entry": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"fullUrl": {
+										"type": "string"
+									},
+									"resource": {
+										"type": "object",
+										"properties": {
+											"resourceType": {
+												"type": "string"
+											},
+											"id": {
+												"type": "string"
+											},
+											"meta": {
+												"type": "object",
+												"properties": {
+													"profile": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											},
+											"text": {
+												"type": "object",
+												"properties": {
+													"status": {
+														"type": "string"
+													},
+													"div": {
+														"type": "string"
+													}
+												}
+											},
+											"extension": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"url": {
+															"type": "string"
+														},
+														"extension": {
+															"type": "array",
+															"items": {
+																"type": "object",
+																"properties": {
+																	"url": {
+																		"type": "string"
+																	},
+																	"valueCoding": {
+																		"type": "object",
+																		"properties": {
+																			"system": {
+																				"type": "string"
+																			},
+																			"code": {
+																				"type": "string"
+																			},
+																			"display": {
+																				"type": "string"
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											},
+											"identifier": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"system": {
+															"type": "string"
+														},
+														"value": {
+															"type": "string"
+														}
+													}
+												}
+											},
+											"name": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"use": {
+															"type": "string"
+														},
+														"family": {
+															"type": "string"
+														},
+														"given": {
+															"type": "array",
+															"items": {
+																"type": "string"
+															}
+														},
+														"prefix": {
+															"type": "array",
+															"items": {
+																"type": "string"
+															}
+														}
+													}
+												}
+											},
+											"telecom": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"system": {
+															"type": "string"
+														},
+														"value": {
+															"type": "string"
+														},
+														"use": {
+															"type": "string"
+														}
+													}
+												}
+											},
+											"gender": {
+												"type": "string"
+											},
+											"birthDate": {
+												"type": "string"
+											},
+											"deceasedDateTime": {
+												"type": "string"
+											},
+											"address": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"extension": {
+															"type": "array",
+															"items": {
+																"type": "object",
+																"properties": {
+																	"url": {
+																		"type": "string"
+																	},
+																	"extension": {
+																		"type": "array",
+																		"items": {
+																			"type": "object",
+																			"properties": {
+																				"url": {
+																					"type": "string"
+																				},
+																				"valueDecimal": {
+																					"type": "number"
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														},
+														"line": {
+															"type": "array",
+															"items": {
+																"type": "string"
+															}
+														},
+														"city": {
+															"type": "string"
+														},
+														"state": {
+															"type": "string"
+														},
+														"postalCode": {
+															"type": "string"
+														},
+														"country": {
+															"type": "string"
+														}
+													}
+												}
+											},
+											"maritalStatus": {
+												"type": "object",
+												"properties": {
+													"coding": {
+														"type": "array",
+														"items": {
+															"type": "object",
+															"properties": {
+																"system": {
+																	"type": "string"
+																},
+																"code": {
+																	"type": "string"
+																},
+																"display": {
+																	"type": "string"
+																}
+															}
+														}
+													},
+													"text": {
+														"type": "string"
+													}
+												}
+											},
+											"multipleBirthBoolean": {
+												"type": "boolean"
+											},
+											"communication": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"language": {
+															"type": "object",
+															"properties": {
+																"coding": {
+																	"type": "array",
+																	"items": {
+																		"type": "object",
+																		"properties": {
+																			"system": {
+																				"type": "string"
+																			},
+																			"code": {
+																				"type": "string"
+																			},
+																			"display": {
+																				"type": "string"
+																			}
+																		}
+																	}
+																},
+																"text": {
+																	"type": "string"
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									},
+									"request": {
+										"type": "object",
+										"properties": {
+											"method": {
+												"type": "string"
+											},
+											"url": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/helthcare_project_link_service')]"
