@@ -17,7 +17,13 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "json_bulk_loading",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": {
+								"value": "$pFileName",
+								"type": "Expression"
+							}
+						}
 					},
 					"fieldList": [
 						"childItems"
