@@ -1,0 +1,113 @@
+{
+	"name": "load_mup_file",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "helthcare_project_link_service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "MUP_DPR_RY24_P04_V10_DY22_NPIBN - MUP_DPR_RY24_P04_V10_DY22_NPIBN (1).csv",
+				"folderPath": "landing-data/mup-csv-file-data",
+				"fileSystem": "healthcare-project-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Prscrbr_NPI",
+				"type": "String"
+			},
+			{
+				"name": "Prscrbr_Last_Org_Name",
+				"type": "String"
+			},
+			{
+				"name": "Prscrbr_First_Name",
+				"type": "String"
+			},
+			{
+				"name": "Prscrbr_City",
+				"type": "String"
+			},
+			{
+				"name": "Prscrbr_State_Abrvtn",
+				"type": "String"
+			},
+			{
+				"name": "Prscrbr_State_FIPS",
+				"type": "String"
+			},
+			{
+				"name": "Prscrbr_Type",
+				"type": "String"
+			},
+			{
+				"name": "Prscrbr_Type_Src",
+				"type": "String"
+			},
+			{
+				"name": "Brnd_Name",
+				"type": "String"
+			},
+			{
+				"name": "Gnrc_Name",
+				"type": "String"
+			},
+			{
+				"name": "Tot_Clms",
+				"type": "String"
+			},
+			{
+				"name": "Tot_30day_Fills",
+				"type": "String"
+			},
+			{
+				"name": "Tot_Day_Suply",
+				"type": "String"
+			},
+			{
+				"name": "Tot_Drug_Cst",
+				"type": "String"
+			},
+			{
+				"name": "Tot_Benes",
+				"type": "String"
+			},
+			{
+				"name": "GE65_Sprsn_Flag",
+				"type": "String"
+			},
+			{
+				"name": "GE65_Tot_Clms",
+				"type": "String"
+			},
+			{
+				"name": "GE65_Tot_30day_Fills",
+				"type": "String"
+			},
+			{
+				"name": "GE65_Tot_Drug_Cst",
+				"type": "String"
+			},
+			{
+				"name": "GE65_Tot_Day_Suply",
+				"type": "String"
+			},
+			{
+				"name": "GE65_Bene_Sprsn_Flag",
+				"type": "String"
+			},
+			{
+				"name": "GE65_Tot_Benes",
+				"type": "String"
+			}
+		]
+	}
+}
