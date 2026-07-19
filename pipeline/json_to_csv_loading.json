@@ -20,7 +20,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FileName": {
-								"value": "$pFileName",
+								"value": "bronze-layer/patient-fhir",
 								"type": "Expression"
 							}
 						}
@@ -79,9 +79,6 @@
 										}
 									},
 									"datasetParameters": {
-										"jsonsource": {
-											"FileName": "$pFileName"
-										},
 										"sink1": {
 											"FileName": {
 												"value": "@item().name",

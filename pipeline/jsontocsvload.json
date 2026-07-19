@@ -25,9 +25,6 @@
 							}
 						},
 						"datasetParameters": {
-							"jsonsource": {
-								"FileName": "$pFileName"
-							},
 							"sink1": {
 								"FileName": "replace($pFileName,'.json','.csv')"
 							}
