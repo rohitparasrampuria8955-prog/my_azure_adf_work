@@ -1,0 +1,96 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "rohitbigdata3"
+		},
+		"MySql1_password": {
+			"value": ""
+		},
+		"MySql2_password": {
+			"value": ""
+		},
+		"dineshMySql3_password": {
+			"value": ""
+		},
+		"dineshnewMySql3_password": {
+			"value": ""
+		},
+		"helthcare_project_link_service_accountKey": {
+			"value": ""
+		},
+		"mysqltoparuwt_accountKey": {
+			"value": ""
+		},
+		"new_practice_accountKey": {
+			"value": ""
+		},
+		"projectlinkservice_accountKey": {
+			"value": ""
+		},
+		"to_synaps_password": {
+			"value": ""
+		},
+		"MySql1_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"MySql1_properties_typeProperties_database": {
+			"value": "hospital"
+		},
+		"MySql1_properties_typeProperties_username": {
+			"value": "root"
+		},
+		"MySql2_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"MySql2_properties_typeProperties_database": {
+			"value": "hospital"
+		},
+		"MySql2_properties_typeProperties_username": {
+			"value": "root"
+		},
+		"dineshMySql3_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"dineshMySql3_properties_typeProperties_database": {
+			"value": "healthcare_db"
+		},
+		"dineshMySql3_properties_typeProperties_username": {
+			"value": "root"
+		},
+		"dineshnewMySql3_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"dineshnewMySql3_properties_typeProperties_database": {
+			"value": "healthcare_db"
+		},
+		"dineshnewMySql3_properties_typeProperties_username": {
+			"value": "root"
+		},
+		"helthcare_project_link_service_properties_typeProperties_url": {
+			"value": "https://rohitprojectdata.dfs.core.windows.net/"
+		},
+		"mysqltoparuwt_properties_typeProperties_url": {
+			"value": "https://dineshazurestorage.dfs.core.windows.net/"
+		},
+		"new_practice_properties_typeProperties_url": {
+			"value": "https://junepracticeadf.dfs.core.windows.net/"
+		},
+		"projectlinkservice_properties_typeProperties_url": {
+			"value": "https://testregextest1.dfs.core.windows.net/"
+		},
+		"to_synaps_properties_typeProperties_server": {
+			"value": "bigdata3-ws1.sql.azuresynapse.net"
+		},
+		"to_synaps_properties_typeProperties_database": {
+			"value": "rohit_pool"
+		},
+		"to_synaps_properties_typeProperties_userName": {
+			"value": "sqladminuser"
+		},
+		"jsonloadtriger_properties_typeProperties_scope": {
+			"value": "/subscriptions/c869b1e7-74b0-451a-9936-ee00bf000178/resourceGroups/bigata3_synaps/providers/Microsoft.Storage/storageAccounts/testregextest1"
+		}
+	}
+}

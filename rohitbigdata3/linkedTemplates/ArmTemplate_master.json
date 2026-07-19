@@ -1,0 +1,265 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "rohitbigdata3"
+		},
+		"MySql1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'MySql1'"
+		},
+		"MySql2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'MySql2'"
+		},
+		"dineshMySql3_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'dineshMySql3'"
+		},
+		"dineshnewMySql3_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'dineshnewMySql3'"
+		},
+		"helthcare_project_link_service_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'helthcare_project_link_service'"
+		},
+		"mysqltoparuwt_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'mysqltoparuwt'"
+		},
+		"new_practice_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'new_practice'"
+		},
+		"projectlinkservice_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'projectlinkservice'"
+		},
+		"to_synaps_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'to_synaps'"
+		},
+		"MySql1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost"
+		},
+		"MySql1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "hospital"
+		},
+		"MySql1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "root"
+		},
+		"MySql2_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost"
+		},
+		"MySql2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "hospital"
+		},
+		"MySql2_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "root"
+		},
+		"dineshMySql3_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost"
+		},
+		"dineshMySql3_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "healthcare_db"
+		},
+		"dineshMySql3_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "root"
+		},
+		"dineshnewMySql3_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost"
+		},
+		"dineshnewMySql3_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "healthcare_db"
+		},
+		"dineshnewMySql3_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "root"
+		},
+		"helthcare_project_link_service_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://rohitprojectdata.dfs.core.windows.net/"
+		},
+		"mysqltoparuwt_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://dineshazurestorage.dfs.core.windows.net/"
+		},
+		"new_practice_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://junepracticeadf.dfs.core.windows.net/"
+		},
+		"projectlinkservice_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://testregextest1.dfs.core.windows.net/"
+		},
+		"to_synaps_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "bigdata3-ws1.sql.azuresynapse.net"
+		},
+		"to_synaps_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "rohit_pool"
+		},
+		"to_synaps_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sqladminuser"
+		},
+		"jsonloadtriger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/c869b1e7-74b0-451a-9936-ee00bf000178/resourceGroups/bigata3_synaps/providers/Microsoft.Storage/storageAccounts/testregextest1"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "rohitbigdata3_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"MySql1_password": {
+						"value": "[parameters('MySql1_password')]"
+					},
+					"helthcare_project_link_service_accountKey": {
+						"value": "[parameters('helthcare_project_link_service_accountKey')]"
+					},
+					"mysqltoparuwt_accountKey": {
+						"value": "[parameters('mysqltoparuwt_accountKey')]"
+					},
+					"new_practice_accountKey": {
+						"value": "[parameters('new_practice_accountKey')]"
+					},
+					"projectlinkservice_accountKey": {
+						"value": "[parameters('projectlinkservice_accountKey')]"
+					},
+					"to_synaps_password": {
+						"value": "[parameters('to_synaps_password')]"
+					},
+					"MySql1_properties_typeProperties_server": {
+						"value": "[parameters('MySql1_properties_typeProperties_server')]"
+					},
+					"MySql1_properties_typeProperties_database": {
+						"value": "[parameters('MySql1_properties_typeProperties_database')]"
+					},
+					"MySql1_properties_typeProperties_username": {
+						"value": "[parameters('MySql1_properties_typeProperties_username')]"
+					},
+					"helthcare_project_link_service_properties_typeProperties_url": {
+						"value": "[parameters('helthcare_project_link_service_properties_typeProperties_url')]"
+					},
+					"mysqltoparuwt_properties_typeProperties_url": {
+						"value": "[parameters('mysqltoparuwt_properties_typeProperties_url')]"
+					},
+					"new_practice_properties_typeProperties_url": {
+						"value": "[parameters('new_practice_properties_typeProperties_url')]"
+					},
+					"projectlinkservice_properties_typeProperties_url": {
+						"value": "[parameters('projectlinkservice_properties_typeProperties_url')]"
+					},
+					"to_synaps_properties_typeProperties_server": {
+						"value": "[parameters('to_synaps_properties_typeProperties_server')]"
+					},
+					"to_synaps_properties_typeProperties_database": {
+						"value": "[parameters('to_synaps_properties_typeProperties_database')]"
+					},
+					"to_synaps_properties_typeProperties_userName": {
+						"value": "[parameters('to_synaps_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "rohitbigdata3_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"MySql2_password": {
+						"value": "[parameters('MySql2_password')]"
+					},
+					"dineshMySql3_password": {
+						"value": "[parameters('dineshMySql3_password')]"
+					},
+					"dineshnewMySql3_password": {
+						"value": "[parameters('dineshnewMySql3_password')]"
+					},
+					"MySql2_properties_typeProperties_server": {
+						"value": "[parameters('MySql2_properties_typeProperties_server')]"
+					},
+					"MySql2_properties_typeProperties_database": {
+						"value": "[parameters('MySql2_properties_typeProperties_database')]"
+					},
+					"MySql2_properties_typeProperties_username": {
+						"value": "[parameters('MySql2_properties_typeProperties_username')]"
+					},
+					"dineshMySql3_properties_typeProperties_server": {
+						"value": "[parameters('dineshMySql3_properties_typeProperties_server')]"
+					},
+					"dineshMySql3_properties_typeProperties_database": {
+						"value": "[parameters('dineshMySql3_properties_typeProperties_database')]"
+					},
+					"dineshMySql3_properties_typeProperties_username": {
+						"value": "[parameters('dineshMySql3_properties_typeProperties_username')]"
+					},
+					"dineshnewMySql3_properties_typeProperties_server": {
+						"value": "[parameters('dineshnewMySql3_properties_typeProperties_server')]"
+					},
+					"dineshnewMySql3_properties_typeProperties_database": {
+						"value": "[parameters('dineshnewMySql3_properties_typeProperties_database')]"
+					},
+					"dineshnewMySql3_properties_typeProperties_username": {
+						"value": "[parameters('dineshnewMySql3_properties_typeProperties_username')]"
+					},
+					"jsonloadtriger_properties_typeProperties_scope": {
+						"value": "[parameters('jsonloadtriger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'rohitbigdata3_ArmTemplate_0')]"
+			]
+		}
+	]
+}
