@@ -1,0 +1,24 @@
+{
+	"name": "sink_icd_file",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "helthcare_project_link_service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "bronze-layer/icd10",
+				"fileSystem": "healthcare-project-data"
+			},
+			"columnDelimiter": "\t",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
