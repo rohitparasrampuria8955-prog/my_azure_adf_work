@@ -5,6 +5,9 @@
 			"referenceName": "MySql1",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "helthcare_data_dataset/landing_to_bronze_dataset"
+		},
 		"annotations": [],
 		"type": "MySqlTable",
 		"schema": [],
