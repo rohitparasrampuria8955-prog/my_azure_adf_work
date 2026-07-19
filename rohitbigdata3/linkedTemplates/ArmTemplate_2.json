@@ -1,0 +1,154 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "rohitbigdata3"
+		},
+		"jsonloadtriger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/c869b1e7-74b0-451a-9936-ee00bf000178/resourceGroups/bigata3_synaps/providers/Microsoft.Storage/storageAccounts/testregextest1"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline5')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "GetMetadata1",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "Jsonbulkloading",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "JsonReadSettings"
+							}
+						}
+					},
+					{
+						"name": "froeach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "GetMetadata1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('GetMetadata1').output.childItems",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "Data flow1",
+									"type": "ExecuteDataFlow",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataflow": {
+											"referenceName": "json_data_flow",
+											"type": "DataFlowReference",
+											"parameters": {},
+											"datasetParameters": {
+												"jsonsource": {},
+												"sink1": {}
+											}
+										},
+										"staging": {},
+										"compute": {
+											"coreCount": 8,
+											"computeType": "General"
+										},
+										"traceLevel": "Fine"
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"filename": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-07-07T06:01:48Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/jsonloadtriger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pipeline5",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/hospitalprjectrowdata/blobs/jsonfiledata/",
+					"blobPathEndsWith": ".json",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('jsonloadtriger_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pipeline5')]"
+			]
+		}
+	]
+}

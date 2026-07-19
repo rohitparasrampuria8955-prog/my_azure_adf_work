@@ -251,6 +251,26 @@
 					},
 					"dineshnewMySql3_properties_typeProperties_username": {
 						"value": "[parameters('dineshnewMySql3_properties_typeProperties_username')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'rohitbigdata3_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "rohitbigdata3_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"jsonloadtriger_properties_typeProperties_scope": {
 						"value": "[parameters('jsonloadtriger_properties_typeProperties_scope')]"
@@ -258,7 +278,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'rohitbigdata3_ArmTemplate_0')]"
+				"[resourceId('Microsoft.Resources/deployments', 'rohitbigdata3_ArmTemplate_1')]"
 			]
 		}
 	]

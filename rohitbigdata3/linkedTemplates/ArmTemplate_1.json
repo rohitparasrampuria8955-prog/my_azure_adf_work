@@ -54,10 +54,6 @@
 		"dineshnewMySql3_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "root"
-		},
-		"jsonloadtriger_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/c869b1e7-74b0-451a-9936-ee00bf000178/resourceGroups/bigata3_synaps/providers/Microsoft.Storage/storageAccounts/testregextest1"
 		}
 	},
 	"variables": {
@@ -105,6 +101,33 @@
 				"typeProperties": {
 					"tableName": "mup_detail"
 				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sink_icd_file')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "helthcare_project_link_service",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "bronze-layer/icd10",
+						"fileSystem": "healthcare-project-data"
+					},
+					"columnDelimiter": "\t",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": []
 			},
 			"dependsOn": []
 		},
@@ -274,6 +297,43 @@
 					},
 					{
 						"name": "loyalty_points",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/txt_file_load')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "helthcare_project_link_service",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "icd10cm_codes_2025 (1) (1).txt",
+						"folderPath": "landing-data/text-file-data",
+						"fileSystem": "healthcare-project-data"
+					},
+					"columnDelimiter": "\t",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "A000        Cholera due to Vibrio cholerae 01",
+						"type": "String"
+					},
+					{
+						"name": " biovar cholerae",
 						"type": "String"
 					}
 				]
@@ -495,6 +555,86 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/to_csv1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/load_icd_file_in_bronze')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "txt_file_load",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "sink_icd_file",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "Healthcare_Data_piplines/landing-folder-to-bronze-load-pipline"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/txt_file_load')]",
+				"[concat(variables('factoryId'), '/datasets/sink_icd_file')]"
 			]
 		},
 		{
@@ -1089,142 +1229,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/MySqltoload')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline5')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "GetMetadata1",
-						"type": "GetMetadata",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "Jsonbulkloading",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"childItems"
-							],
-							"storeSettings": {
-								"type": "AzureBlobFSReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							},
-							"formatSettings": {
-								"type": "JsonReadSettings"
-							}
-						}
-					},
-					{
-						"name": "froeach1",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "GetMetadata1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('GetMetadata1').output.childItems",
-								"type": "Expression"
-							},
-							"isSequential": true,
-							"activities": [
-								{
-									"name": "Data flow1",
-									"type": "ExecuteDataFlow",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"dataflow": {
-											"referenceName": "json_data_flow",
-											"type": "DataFlowReference",
-											"parameters": {},
-											"datasetParameters": {
-												"jsonsource": {},
-												"sink1": {}
-											}
-										},
-										"staging": {},
-										"compute": {
-											"coreCount": 8,
-											"computeType": "General"
-										},
-										"traceLevel": "Fine"
-									}
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"variables": {
-					"filename": {
-						"type": "String"
-					}
-				},
-				"annotations": [],
-				"lastPublishTime": "2026-07-07T06:01:48Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/json_data_flow')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/jsonloadtriger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pipeline5",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/hospitalprjectrowdata/blobs/jsonfiledata/",
-					"blobPathEndsWith": ".json",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('jsonloadtriger_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline5')]"
 			]
 		}
 	]
