@@ -81,6 +81,12 @@
 									"datasetParameters": {
 										"jsonsource": {
 											"FileName": "$pFileName"
+										},
+										"sink1": {
+											"FileName": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
 										}
 									}
 								},
