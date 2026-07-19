@@ -5,6 +5,9 @@
 			"referenceName": "new_practice",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "practice_data_sets"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

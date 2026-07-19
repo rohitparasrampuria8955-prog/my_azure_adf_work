@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "helthcare_data_dataset/landing_to_bronze_dataset"
+			"name": "healthcare_data_dataset/landing_to_bronze_dataset"
 		},
 		"annotations": [],
 		"type": "DelimitedText",

@@ -1,19 +1,26 @@
 {
-	"name": "mup_sink_file",
+	"name": "bulk_json_to_csv_sink",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "helthcare_project_link_service",
 			"type": "LinkedServiceReference"
 		},
-		"folder": {
-			"name": "healthcare_data_dataset/landing_to_bronze_dataset"
+		"parameters": {
+			"FileName": {
+				"type": "string",
+				"defaultValue": "replace($pFileName,'.json','.csv')"
+			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "bronze-layer/mup-drug-spent",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"folderPath": "silver-layer",
 				"fileSystem": "healthcare-project-data"
 			},
 			"columnDelimiter": ",",

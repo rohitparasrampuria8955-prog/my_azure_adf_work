@@ -5,6 +5,9 @@
 			"referenceName": "dineshnewMySql3",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "practice_data_sets"
+		},
 		"annotations": [],
 		"type": "MySqlTable",
 		"schema": [],

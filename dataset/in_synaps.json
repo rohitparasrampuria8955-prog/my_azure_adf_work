@@ -5,6 +5,9 @@
 			"referenceName": "to_synaps",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "practice_data_sets"
+		},
 		"annotations": [],
 		"type": "AzureSqlDWTable",
 		"schema": [

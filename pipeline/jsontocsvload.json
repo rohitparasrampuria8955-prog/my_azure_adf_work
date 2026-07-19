@@ -27,6 +27,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "practice_pipline"
+		},
 		"annotations": [],
 		"lastPublishTime": "2026-07-03T05:54:15Z"
 	},
