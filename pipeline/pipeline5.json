@@ -66,7 +66,21 @@
 							"typeProperties": {
 								"dataflow": {
 									"referenceName": "json_data_flow",
-									"type": "DataFlowReference"
+									"type": "DataFlowReference",
+									"parameters": {
+										"pFileName": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"jsonsource": {
+											"FileName": "$pFileName"
+										},
+										"sink1": {
+											"FileName": "replace($pFileName,'.json','.csv')"
+										}
+									}
 								},
 								"compute": {
 									"coreCount": 8,
