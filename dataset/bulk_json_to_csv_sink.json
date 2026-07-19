@@ -7,8 +7,7 @@
 		},
 		"parameters": {
 			"FileName": {
-				"type": "string",
-				"defaultValue": "replace($pFileName,'.json','.csv')"
+				"type": "string"
 			}
 		},
 		"annotations": [],
