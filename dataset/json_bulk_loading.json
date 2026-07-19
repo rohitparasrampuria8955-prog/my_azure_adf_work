@@ -21,6 +21,12 @@
 				},
 				"folderPath": "bronze-layer/patient-fhir",
 				"fileSystem": "healthcare-project-data"
+			},
+			"compression": {
+				"type": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {
