@@ -79,6 +79,12 @@
 										}
 									},
 									"datasetParameters": {
+										"source1": {
+											"FileName": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
+										},
 										"sink1": {
 											"FileName": {
 												"value": "@item().name",
