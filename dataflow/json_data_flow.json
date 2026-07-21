@@ -67,7 +67,7 @@
 			],
 			"scriptLines": [
 				"parameters{",
-				"     pFileName as string",
+				"     FileName as string ($pFileName)",
 				"}",
 				"source(output(",
 				"          resourceType as string,",
