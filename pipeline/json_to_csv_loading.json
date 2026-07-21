@@ -72,8 +72,20 @@
 								"dataflow": {
 									"referenceName": "json_data_flow",
 									"type": "DataFlowReference",
+									"parameters": {
+										"pFileName": {
+											"value": "@item().fileName",
+											"type": "Expression"
+										}
+									},
 									"datasetParameters": {
 										"source1": {
+											"FileName": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
+										},
+										"sink1": {
 											"FileName": {
 												"value": "@item().name",
 												"type": "Expression"
