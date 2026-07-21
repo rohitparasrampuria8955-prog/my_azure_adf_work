@@ -20,7 +20,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FileName": {
-								"value": "bronze-layer/patient-fhir",
+								"value": "@pipeline().parameters.Folder_name",
 								"type": "Expression"
 							}
 						}
@@ -104,6 +104,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"Folder_name": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Healthcare_Data_piplines/bronze_to_silver_pipline"
 		},
