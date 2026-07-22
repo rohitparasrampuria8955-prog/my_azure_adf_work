@@ -5,11 +5,17 @@
 			"referenceName": "helthcare_project_link_service",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "@dataset().FileName",
 				"folderPath": "landingJson",
 				"fileSystem": "healthcare-project-data"
 			}
