@@ -17,13 +17,7 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "json_bulk_loading",
-						"type": "DatasetReference",
-						"parameters": {
-							"FileName": {
-								"value": "@pipeline().parameters.Folder_name",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
@@ -78,12 +72,6 @@
 												"value": "@item().name",
 												"type": "Expression"
 											}
-										},
-										"sink1": {
-											"FileName": {
-												"value": "@item().name",
-												"type": "Expression"
-											}
 										}
 									}
 								},
@@ -98,11 +86,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"Folder_name": {
-				"type": "string"
-			}
-		},
 		"folder": {
 			"name": "Healthcare_Data_piplines/bronze_to_silver_pipline"
 		},
